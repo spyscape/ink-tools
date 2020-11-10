@@ -1,20 +1,20 @@
 {
-  "name": "@6i/ink-tools",
-  "version": "1.0.2",
+  "name": "@spyscape/ink-tools",
+  "version": "1.0.3",
   "description": "Utilities to compile story Ink file into JSON.",
   "main": "index.js",
   "bin": {
     "ink-tools": "index.js"
   },
-  "author": "v20100v <vb20100bv@gmail.com>",
+  "author": "SPYSCAPE <developers@spyscape.com>",
   "license": "MIT",
-  "homepage": "https://github.com/v20100v/ink-tools",
+  "homepage": "https://github.com/spyscape/ink-tools",
   "repository": {
-    "url": "https://github.com/v20100v/ink-tools.git",
+    "url": "https://github.com/spyscape/ink-tools.git",
     "type": "git"
   },
   "bugs": {
-    "url": "https://github.com/v20100v/ink-tools/issues"
+    "url": "https://github.com/spyscape/ink-tools/issues"
   },
   "dependencies": {
     "chalk": "^4.1.0",
