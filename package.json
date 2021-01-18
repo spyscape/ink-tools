@@ -1,6 +1,6 @@
 {
   "name": "@spyscape/ink-tools",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utilities to compile story Ink file into JSON.",
   "main": "index.js",
   "bin": {
