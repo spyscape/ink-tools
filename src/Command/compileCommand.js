@@ -44,6 +44,7 @@ function add(program) {
                 program._exit(0, 'commander.compilCommand.inklecate', 'Inklecate success compilation !');
             });
         } else {
+            _executeCompilation(datas);
             _watchInkfile(datas);
         }
     }
