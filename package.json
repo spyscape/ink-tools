@@ -28,7 +28,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "npx pkg --out-path build"
+    "build": "npx pkg --out-path build",
+    "test": "jest"
   },
   "pkg": {
     "assets": [
@@ -40,5 +41,8 @@
     "inklecate",
     "watch",
     "json"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
 }
