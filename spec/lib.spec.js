@@ -8,6 +8,6 @@ describe('#compile', () => {
       const result = subject(inkScript).trim();
 
       expect(result).toEqual(expectedStr);
-    })
-  })
+    });
+  });
 });

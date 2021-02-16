@@ -19,5 +19,5 @@ function compile(inkScript) {
 }
 
 module.exports = {
-  compile: compile,
-}
+  compile,
+};

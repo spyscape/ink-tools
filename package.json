@@ -21,6 +21,7 @@
     "commander": "^5.1.0",
     "md5": "^2.2.1",
     "shelljs": "^0.8.4",
+    "uuid": "^8.3.2",
     "word-wrap": "^1.2.3"
   },
   "engines": {
@@ -29,7 +30,9 @@
   "scripts": {
     "start": "node index.js",
     "build": "npx pkg --out-path build",
-    "test": "jest"
+    "test": "npm run lint && npm run jest",
+    "jest": "jest",
+    "lint": "eslint spec/ src/lib.js"
   },
   "pkg": {
     "assets": [
@@ -43,7 +46,10 @@
     "json"
   ],
   "devDependencies": {
-    "jest": "^26.6.3",
-    "uuid": "^8.3.2"
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "jest": "^26.6.3"
   }
 }
