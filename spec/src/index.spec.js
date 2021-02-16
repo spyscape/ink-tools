@@ -1,5 +1,5 @@
 /* eslint-disable operator-linebreak */
-const subject = require('../src/lib').compile;
+const { compile: subject } = require('../../src');
 
 describe('#compile', () => {
   describe('given a single-line ink string', () => {

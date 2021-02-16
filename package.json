@@ -32,7 +32,7 @@
     "build": "npx pkg --out-path build",
     "test": "npm run lint && npm run jest",
     "jest": "jest",
-    "lint": "eslint spec/ src/lib.js"
+    "lint": "eslint spec/ src/index.js"
   },
   "pkg": {
     "assets": [
