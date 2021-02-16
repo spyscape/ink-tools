@@ -4,7 +4,7 @@
   "description": "Utilities to compile story Ink file into JSON.",
   "main": "index.js",
   "bin": {
-    "ink-tools": "index.js"
+    "ink-tools": "bin/ink-tools"
   },
   "author": "SPYSCAPE <developers@spyscape.com>",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "node": ">=12.18"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "./bin/ink-tools",
     "build": "npx pkg --out-path build",
     "test": "npm run lint && npm run jest",
     "jest": "jest",
