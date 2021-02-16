@@ -1,37 +1,44 @@
 ink-tools
 =========
-> Compile inkle's story [Ink](https://github.com/inkle/ink) file into JSON, with watching mode. 
+
+This is a fork of https://github.com/v20100v/ink-tools. The original version worked only as a CLI app. In addition, this version provides a javascript library interface, allowing Ink script to be converted inline in javascript code. This allows us to write unit and integration tests using real Ink script fixtures, and then pipe the compiled JSON into the subject under test. This is useful, as it allows us to easily test the 'gap' between the script and our React Native app.
 
 ![ink-tools CLI application](./doc/ink-tools.png)
 
 ## Features
-ink-utils is a CLI application built in node.js with [commander.js](https://github.com/tj/commander.js/). It was designed in order to facilitate its integration wiht [inkjs](https://github.com/y-lohse/inkjs), the javascript implementation of inkle's ink scripting language, and to consume ink story into a web application (SPA, React, Angular ...)
+`ink-tools` is a JS library and CLI application built in node.js with [commander.js](https://github.com/tj/commander.js/). It was designed in order to facilitate it's integration with [inkjs](https://github.com/y-lohse/inkjs), the javascript implementation of inkle's ink scripting language, and to consume ink story into a web application (SPA, React, Angular ...)
 
-ink-utils can :
+`ink-tools` can:
 
+- Be used as a JS module by importing and using the `compile` function.
 - Compile a ink file into Json.
 - Watch for ink file changes, in order to perform compilation each time.
+- Be used on Mac, Windows and Linux (requires mono runtimes to be installed)
 
 ## Installation
 
-Install with [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/).
-
-Global installation:
+Local installation:
 ```sh
-$ yarn global add @6i/ink-tools
+$ npm install --save-dev spyscape/ink-tools
 ```
 
-As local developpement dependencies:
-```sh
-$ yarn add @6i/ink-tools --dev
+## Usage as a JS Library
+
+```js
+// common js require
+const { compile } = require('ink-tools');
+// or es modules
+import { compile } from 'ink-tools';
+
+const inkScriptString = 'Hello Ink';
+const inkScriptJson = compile(inkScriptString);
+console.log(inkScriptJson);
+// > {"inkVersion":19,"root":[["^Hello Ink","\n",["done",{.... 
 ```
 
-Or test it with npm package runner
-```sh
-$ npx @6i/ink-tools 
-```
+Behind the scenes, ink-tools takes your input, writes it to disk at the project root as a .ink file, then in a child process runs the inklecate binary to read the file just created. The resulting json file is then read and returned by the compile function. While working with small ink scripts, this process is fairly fast. But it's probably best to avoid piping large fixtures into this process.
 
-## Usages
+## Usage as a CLI app
 
 ### Options
 
@@ -113,4 +120,4 @@ So in development mode, the ink file is compiled before running test `yarn test`
 Release under [MIT](./LICENSE.md) license.
 
 ## Copyright
-Copyright (c) 2020 by 2o1oo <vb20100bv@gmail.com>
+Original version copyright (c) 2020 by 2o1oo <vb20100bv@gmail.com>
