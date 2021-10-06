@@ -1,10 +1,10 @@
 {
   "name": "@spyscape/ink-tools",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Utilities to compile story Ink file into JSON.",
   "main": "index.js",
   "bin": {
-    "ink-tools": "index.js"
+    "ink-tools": "bin/ink-tools"
   },
   "author": "SPYSCAPE <developers@spyscape.com>",
   "license": "MIT",
@@ -21,14 +21,18 @@
     "commander": "^5.1.0",
     "md5": "^2.2.1",
     "shelljs": "^0.8.4",
+    "uuid": "^8.3.2",
     "word-wrap": "^1.2.3"
   },
   "engines": {
     "node": ">=12.18"
   },
   "scripts": {
-    "start": "node index.js",
-    "build": "npx pkg --out-path build"
+    "start": "./bin/ink-tools",
+    "build": "npx pkg --out-path build",
+    "test": "npm run lint && npm run jest",
+    "jest": "jest",
+    "lint": "eslint spec/ src/index.js"
   },
   "pkg": {
     "assets": [
@@ -40,5 +44,12 @@
     "inklecate",
     "watch",
     "json"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "jest": "^26.6.3"
+  }
 }
