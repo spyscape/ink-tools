@@ -40,8 +40,8 @@ function add(program) {
         console.info('Inklecate bin: ' + chalk.yellow(datas.inklecateBin));
 
         if (!options.watch) {
-            _executeCompilation(datas, () => {
-                program._exit(0, 'commander.compilCommand.inklecate', 'Inklecate success compilation !');
+            _executeCompilation(datas, (code, msg) => {
+                program._exit(code, 'commander.compilCommand.inklecate', msg);
             });
         } else {
             _executeCompilation(datas);
@@ -62,12 +62,14 @@ function add(program) {
                     + ((stdout) ? EOL + stdout : '')
                     + ((stderr) ? EOL + stderr : '');
                 console.error(msg);
-                program._exit(1, 'commander.compilCommand.inklecate', msg);
+                if(cbExit !== null) {
+                    cbExit(code, msg);
+                }
             } else {
                 msg = 'Inklecate compilation has finished !';
                 console.success(msg);
                 if(cbExit !== null) {
-                    cbExit();
+                    cbExit(code, 'Inklecate success compilation !');
                 }
             }
         });
