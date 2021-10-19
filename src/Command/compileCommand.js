@@ -77,7 +77,7 @@ function add(program) {
      * Watch changements in ink story file for launch compilation each times
      */
     function _watchInkfile(datas) {
-        let pathinkdir = path.join(datas.inkfile.pathfile, '..');
+        let pathinkdir = path.dirname(datas.inkfile.pathfile);
         let fsWait = false;
         let md5Previous = null;
         let checksums = {};
