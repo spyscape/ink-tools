@@ -79,21 +79,22 @@ function add(program) {
      * Watch changements in ink story file for launch compilation each times
      */
     function _watchInkfile(datas) {
-        let pathinkfile = datas.inkfile.pathfile;
+        let pathinkdir = path.dirname(datas.inkfile.pathfile);
         let fsWait = false;
         let md5Previous = null;
-        fs.watch(pathinkfile, (event, filename) => {
+        let checksums = {};
+        fs.watch(pathinkdir, (event, filename) => {
             if (filename) {
                 if (fsWait) return;
                 fsWait = setTimeout(() => {
                     fsWait = false;
                 }, 100);
 
-                const md5Current = md5(fs.readFileSync(pathinkfile));
-                if (md5Current === md5Previous) {
+                const md5Current = md5(fs.readFileSync(path.join(pathinkdir, filename)));
+                if (md5Current === checksums[filename]) {
                     return;
                 }
-                md5Previous = md5Current;
+                checksums[filename] = md5Current;
                 console.log(EOL + `=== Detecting changement in Ink file "${filename}" ===`);
                 _executeCompilation(datas);
             }
