@@ -13,6 +13,8 @@ const os = require('os');
 const shell = require('shelljs');
 const md5 = require('md5');
 const EOL = require('os').EOL;
+const chokidar = require('chokidar');
+const debounce = require('debounce');
 
 /**
  * Add compile command into CLI application
@@ -44,7 +46,6 @@ function add(program) {
                 program._exit(code, 'commander.compilCommand.inklecate', msg);
             });
         } else {
-            _executeCompilation(datas);
             _watchInkfile(datas);
         }
     }
@@ -80,25 +81,13 @@ function add(program) {
      */
     function _watchInkfile(datas) {
         let pathinkdir = path.dirname(datas.inkfile.pathfile);
-        let fsWait = false;
-        let md5Previous = null;
-        let checksums = {};
-        fs.watch(pathinkdir, (event, filename) => {
-            if (filename) {
-                if (fsWait) return;
-                fsWait = setTimeout(() => {
-                    fsWait = false;
-                }, 100);
 
-                const md5Current = md5(fs.readFileSync(path.join(pathinkdir, filename)));
-                if (md5Current === checksums[filename]) {
-                    return;
-                }
-                checksums[filename] = md5Current;
-                console.log(EOL + `=== Detecting changement in Ink file "${filename}" ===`);
-                _executeCompilation(datas);
-            }
-        });
+        const recompile = debounce((event, filename) => {
+            console.log(EOL + `=== Detecting changement in Ink file "${filename}" ===`);
+            _executeCompilation(datas);
+        }, 100);
+
+        chokidar.watch(pathinkdir).on('all', recompile);
     }
 
     /**
